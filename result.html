@@ -1,0 +1,41 @@
+<h2>Result</h2>
+
+<h3 id="scoreText"></h3>
+
+<p id="score"></p>
+
+<button onclick="goToReview()">Review Your Answers</button>
+
+<br><br>
+
+<!-- NEW BUTTON -->
+<button onclick="goHome()">Go to Home</button>
+<button onclick="goToCertificate()">Get Certificate 🎓</button>
+
+<script>
+
+let score = localStorage.getItem("score");
+document.getElementById("score").innerText = score + "%";
+
+function goToReview() {
+  window.location.href = "review.html";
+}
+
+// ✅ NEW FUNCTION
+function goHome() {
+  window.location.href = "dashboard.html";
+function goToCertificate(){
+
+  let user = localStorage.getItem("currentUser");
+  let history = JSON.parse(localStorage.getItem(user + "_testHistory")) || [];
+
+  // 👉 latest test select
+  let index = history.length - 1;
+
+  localStorage.setItem("selectedCertificateIndex", index);
+
+  window.location.href = "certificate.html";
+}
+}
+
+</script>

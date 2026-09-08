@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SkillTrack Verification</title>
+<style>
+body{
+    font-family:Arial;
+    text-align:center;
+    padding:50px;
+    background:#f4f6f9;
+}
+.card{
+    background:white;
+    padding:40px;
+    width:500px;
+    margin:auto;
+    border-radius:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+.valid{color:green;font-weight:bold;}
+.invalid{color:red;font-weight:bold;}
+</style>
+</head>
+<body>
+
+<div class="card">
+<h2>Certificate Verification</h2>
+<div id="result"></div>
+</div>
+
+<script>
+let params = new URLSearchParams(window.location.search);
+let id = params.get("id");
+
+let data = localStorage.getItem(id);
+
+if(data){
+    let cert = JSON.parse(data);
+    document.getElementById("result").innerHTML = `
+    <p class="valid">✔ Certificate Verified</p>
+    <p><strong>Name:</strong> ${cert.name}</p>
+    <p><strong>Course:</strong> ${cert.course}</p>
+    <p><strong>Score:</strong> ${cert.score}%</p>
+    <p><strong>Date:</strong> ${cert.date}</p>
+    `;
+}else{
+    document.getElementById("result").innerHTML =
+    "<p class='invalid'>✖ Invalid Certificate ID</p>";
+}
+</script>
+
+</body>
+</html>

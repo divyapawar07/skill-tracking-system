@@ -1,0 +1,148 @@
+<h2>HTML Language Test</h2>
+
+<form id="quizForm">
+
+  <p>1. What does HTML stand for?</p>
+  <input type="radio" name="q1" value="HyperText Markup Language"> HyperText Markup Language<br>
+  <input type="radio" name="q1" value="HighText Machine Language"> HighText Machine Language<br>
+  <input type="radio" name="q1" value="HyperText Markdown Language"> HyperText Markdown Language<br>
+  <input type="radio" name="q1" value="None"> None<br><br>
+
+  <p>2. Which tag is used for the largest heading?</p>
+  <input type="radio" name="q2" value="<head>"> &lt;head&gt;<br>
+  <input type="radio" name="q2" value="<h6>"> &lt;h6&gt;<br>
+  <input type="radio" name="q2" value="<h1>"> &lt;h1&gt;<br>
+  <input type="radio" name="q2" value="<heading>"> &lt;heading&gt;<br><br>
+
+  <p>3. Correct syntax for an HTML comment?</p>
+  <input type="radio" name="q3" value="//">// comment<br>
+  <input type="radio" name="q3" value="/*"> /* comment */<br>
+  <input type="radio" name="q3" value="<!--"> &lt;!-- comment --&gt;<br>
+  <input type="radio" name="q3" value="#"> # comment<br><br>
+
+  <p>4. Which tag creates a hyperlink?</p>
+  <input type="radio" name="q4" value="<link>"> &lt;link&gt;<br>
+  <input type="radio" name="q4" value="<a>"> &lt;a&gt;<br>
+  <input type="radio" name="q4" value="<href>"> &lt;href&gt;<br>
+  <input type="radio" name="q4" value="<url>"> &lt;url&gt;<br><br>
+
+  <p>5. Which attribute opens a link in a new tab?</p>
+  <input type="radio" name="q5" value="_new"> target="_new"<br>
+  <input type="radio" name="q5" value="target='_blank'"> target="_blank"<br>
+  <input type="radio" name="q5" value="new_tab"> rel="new_tab"<br>
+  <input type="radio" name="q5" value="href"> href="_blank"<br><br>
+
+  <p>6. Which is a void (self-closing) tag?</p>
+  <input type="radio" name="q6" value="<p>"> &lt;p&gt;<br>
+  <input type="radio" name="q6" value="<div>"> &lt;div&gt;<br>
+  <input type="radio" name="q6" value="<br>"> &lt;br&gt;<br>
+  <input type="radio" name="q6" value="<html>"> &lt;html&gt;<br><br>
+
+  <p>7. How to insert an image?</p>
+  <input type="radio" name="q7" value="href"> &lt;img href="img.jpg"&gt;<br>
+  <input type="radio" name="q7" value="src"> &lt;img src="img.jpg"&gt;<br>
+  <input type="radio" name="q7" value="image"> &lt;image src="img.jpg"&gt;<br>
+  <input type="radio" name="q7" value="pic"> &lt;pic src="img.jpg"&gt;<br><br>
+
+  <p>8. Tag used for a list item?</p>
+  <input type="radio" name="q8" value="<list>"> &lt;list&gt;<br>
+  <input type="radio" name="q8" value="<item>"> &lt;item&gt;<br>
+  <input type="radio" name="q8" value="<li>"> &lt;li&gt;<br>
+  <input type="radio" name="q8" value="<ul>"> &lt;ul&gt;<br><br>
+
+  <p>9. Where does the &lt;title&gt; tag appear?</p>
+<input type="radio" name="q9" value="Body"> Inside the Body<br>
+<input type="radio" name="q9" value="Browser Tab/Head section"> Browser Tab/Head section<br>
+<input type="radio" name="q9" value="Footer"> In the Footer<br>
+<input type="radio" name="q9" value="Tooltip"> As a tooltip<br><br>
+
+<p>10. HTML5 element for a site footer?</p>
+<input type="radio" name="q10" value="<bottom>"> &lt;bottom&gt;<br>
+<input type="radio" name="q10" value="<footer>"> &lt;footer&gt;<br>
+<input type="radio" name="q10" value="<section>"> &lt;section&gt;<br>
+<input type="radio" name="q10" value="<end>"> &lt;end&gt;<br><br>
+
+  <button type="button" onclick="submitTest()">Submit</button>
+
+</form>
+
+<script>
+  function submitTest() {
+    let questions = {
+      q1: "What does HTML stand for?",
+      q2: "Which tag is used for the largest heading?",
+      q3: "Correct syntax for an HTML comment?",
+      q4: "Which tag creates a hyperlink?",
+      q5: "Which attribute opens a link in a new tab?",
+      q6: "Which is a void (self-closing) tag?",
+      q7: "How to insert an image?",
+      q8: "Tag used for a list item?",
+      q9: "Where does the title tag appear?",
+      q10: "HTML5 element for a site footer?"
+    };
+
+    let correctAnswers = {
+      q1: "HyperText Markup Language",
+      q2: "<h1>",
+      q3: "<!--",
+      q4: "<a>",
+      q5: "target='_blank'",
+      q6: "<br>",
+      q7: "src",
+      q8: "<li>",
+      q9: "Browser Tab/Head section",
+      q10: "<footer>"
+    };
+
+    let score = 0;
+  let userAnswers = {};
+
+  for(let key in correctAnswers) {
+    let selected = document.querySelector(`input[name="${key}"]:checked`);
+
+    if(selected){
+      userAnswers[key] = selected.value;
+      if(selected.value === correctAnswers[key]){
+        score++;
+      }
+    }
+  }
+
+  let percent = (score / 10) * 100;
+
+  // ✅ YOUR FEATURES (unchanged)
+  localStorage.setItem("score", percent);
+  localStorage.setItem("userAnswers", JSON.stringify(userAnswers));
+  localStorage.setItem("correctAnswers", JSON.stringify(correctAnswers));
+
+  // 🔥 USER BASED HISTORY (KEEPING YOUR FEATURE)
+  let user = localStorage.getItem("currentUser") || "defaultUser";
+  let course = localStorage.getItem("course") || "Course";
+  let today = new Date().toLocaleDateString();
+  let status = percent >= 50 ? "Pass" : "Fail";
+
+  let history = JSON.parse(localStorage.getItem(user + "_testHistory")) || [];
+
+  history.push({
+    course: course,
+    score: percent,
+    max: 100,
+    date: today,
+    status: status
+  });
+
+  localStorage.setItem(user + "_testHistory", JSON.stringify(history));
+
+  // 🔥 ALSO SAVE COMMON (for safety)
+  localStorage.setItem("testHistory", JSON.stringify(history));
+
+  // 🔥 IMPORTANT (certificate ko batane ke liye konsa test)
+  localStorage.setItem("selectedCertificateIndex", history.length - 1);
+
+  // ✅ FINAL REDIRECT
+  window.location.href = "result.html";
+}
+</script>
+</body>
+</html>
+

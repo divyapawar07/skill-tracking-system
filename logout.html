@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Logout Page</title>
+</head>
+<body>
+    <!-- Added quotes to the onclick attribute -->
+    <button onclick="goto()">LOGOUT</button>
+
+    <script>
+        // Added parentheses to function name
+        function goto() {
+            // Clears all keys in localStorage
+            localStorage.clear(); 
+            // Added quotes around the filename string
+            window.location.href = "login.html"; 
+        }
+    </script>
+</body>
+</html>

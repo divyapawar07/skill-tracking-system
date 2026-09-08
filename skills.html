@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Skills Management</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="skills.css">
+</head>
+<body>
+<h2>Select Skill</h2>
+
+<select id="category" onchange="loadSkills()">
+  <option>Select Category</option>
+  <option value="coding">Coding</option>
+  <option value="soft">Soft Skill</option>
+</select>
+
+<select id="level" onchange="loadSkills()">
+  <option>Select Level</option>
+  <option value="simple">Simple</option>
+  <option value="medium">Medium</option>
+  <option value="complex">Complex</option>
+</select>
+
+<select id="skillList">
+  <option>Select Skill</option>
+</select>
+
+<button onclick="saveSkill()">Save Skill</button>
+<div class="container">
+
+  <!-- Add Skill Form -->
+  <div class="section">
+    <h2>Add Skill</h2>
+
+    <form class="skill-form">
+      <input type="text" placeholder="Skill Name">
+
+      <select>
+        <option>Select Category</option>
+        <option>Soft Skill</option>
+        <option>Hard Skill</option>
+      </select>
+      <select id="courseSelect">
+  <option>Select Course</option>
+  <option>HTML</option>
+  <option>CSS</option>
+  <option>Java</option>
+  <option>Python</option>
+</select>
+      <label>Skill Level</label>
+      <input type="range" min="0" max="100">
+
+      <button type="submit">Add Skill</button>
+    </form>
+  </div>
+
+  <!-- Skill Table -->
+  <div class="section">
+    <h2>Skill List</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Skill</th>
+          <th>Category</th>
+          <th>Level</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>HTML</td>
+          <td>Hard Skill</td>
+          <td>80%</td>
+          <td><span class="status completed">Completed</span></td>
+          <td>
+            <button class="edit">Edit</button>
+            <button class="delete">Delete</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Communication</td>
+          <td>Soft Skill</td>
+          <td>60%</td>
+          <td><span class="status pending">Pending</span></td>
+          <td>
+            <button class="edit">Edit</button>
+            <button class="delete">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</div>
+<button onclick="goPretest()">Continue</button>
+<script>
+function saveSkill() {
+  let skill = document.getElementById("courseSelect").value;
+
+  if(skill === "Select Course") {
+    alert("Select a skill!");
+  } else {
+    localStorage.setItem("selectedSkill", skill);
+    window.location.href = "training.html";
+  }
+}
+
+function go(page) {
+  window.location.href = page;
+}
+
+function logout() {
+  localStorage.clear(); // remove user data
+  window.location.href = "index.html"; // login page
+}
+
+function loadSkills() {
+  let category = document.getElementById("category").value;
+  let level = document.getElementById("level").value;
+  let skillList = document.getElementById("skillList");
+
+  skillList.innerHTML = "<option>Select Skill</option>";
+
+  if(category === "coding") {
+
+    if(level === "simple") {
+      skillList.innerHTML += "<option>C</option>";
+      skillList.innerHTML += "<option>C++</option>";
+    }
+
+    else if(level === "medium") {
+      skillList.innerHTML += "<option>Python</option>";
+      skillList.innerHTML += "<option>JavaScript</option>";
+      skillList.innerHTML += "<option>Frontend (HTML, CSS, JS)</option>";
+    }
+
+    else if(level === "complex") {
+      skillList.innerHTML += "<option>Java</option>";
+      skillList.innerHTML += "<option>Backend (Node.js, PHP)</option>";
+    }
+  }
+
+  else if(category === "soft") {
+    skillList.innerHTML += "<option>Communication</option>";
+    skillList.innerHTML += "<option>Leadership</option>";
+  }
+}
+
+function saveSkill() {
+  let skill = document.getElementById("skillList").value;
+
+  if(skill === "Select Skill") {
+    alert("Please select a skill!");
+  } else {
+    localStorage.setItem("selectedSkill", skill);
+    window.location.href = "training.html";
+  }
+}
+
+function goPretest() {
+  let skill = document.getElementById("skillList").value;
+
+  if(skill === "Select Skill") {
+    alert("Select a skill first!");
+  } else {
+    localStorage.setItem("selectedSkill", skill);
+    window.location.href = "pretest.html";
+  }
+}
+
+</script>
+<button onclick="saveSkill()">Go to Training</button>
+
+</body>
+</html>

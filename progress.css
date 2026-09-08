@@ -1,0 +1,116 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: #FFF7ED;
+  padding: 20px;
+}
+
+/* Container */
+.container {
+  max-width: 800px;
+  margin: auto;
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: #F59E0B;
+  text-align: center;
+}
+
+/* Card */
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Skill Progress */
+.skill {
+  margin-bottom: 20px;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+/* Progress bar */
+.bar {
+  width: 100%;
+  height: 12px;
+  background: #eee;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Fill bars with animation */
+.bar div {
+  height: 100%;
+  border-radius: 10px;
+  animation: load 1.5s ease-in-out;
+}
+
+/* Individual colors */
+.html {
+  width: 70%;
+  background: linear-gradient(90deg, #F59E0B, #FB923C);
+}
+
+.css {
+  width: 50%;
+  background: linear-gradient(90deg, #22C55E, #4ADE80);
+}
+
+.java {
+  width: 80%;
+  background: linear-gradient(90deg, #EF4444, #F87171);
+}
+
+/* Animation */
+@keyframes load {
+  from {
+    width: 0;
+  }
+}
+
+/* Chart Section */
+.chart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  height: 200px;
+  margin-top: 20px;
+}
+
+.chart-bar {
+  width: 60px;
+  text-align: center;
+  color: white;
+  border-radius: 8px 8px 0 0;
+  padding-top: 10px;
+  font-size: 14px;
+}
+
+/* Chart Heights */
+.html-bar {
+  height: 70%;
+  background: #F59E0B;
+}
+
+.css-bar {
+  height: 50%;
+  background: #22C55E;
+}
+
+.java-bar {
+  height: 80%;
+  background: #EF4444;
+}

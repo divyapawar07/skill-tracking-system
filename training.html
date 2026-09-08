@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Training Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="training.css">
+</head>
+<body>
+
+<div class="container">
+
+  <h2>📚 Training Programs</h2>
+
+  <!-- Available Trainings -->
+  <div class="section">
+    <h3>Available Trainings</h3>
+
+    <div class="card-container">
+
+      <div class="card">
+        <h4>HTML & CSS Basics</h4>
+        <p>Duration: 4 Weeks</p>
+        <p>Provider: Coursera</p>
+        <button onclick="openCourse('html')">Start</button>
+
+      </div>
+
+      <div class="card">
+        <h4>Java Programming</h4>
+        <p>Duration: 6 Weeks</p>
+        <p>Provider: Udemy</p>
+        <button onclick="openCourse('java')">Start</button>
+      </div>
+
+      <div class="card">
+        <h4>Communication Skills</h4>
+        <p>Duration: 2 Weeks</p>
+        <p>Provider: Google</p>
+        <button onclick="openCourse('communication')">Start</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Completed Trainings -->
+  <div class="section">
+    <h3>Completed Trainings</h3>
+
+    <div class="card-container">
+
+      <div class="card completed">
+        <h4>Web Development Basics</h4>
+        <p>Duration: 5 Weeks</p>
+        <p>Provider: Coursera</p>
+        <span class="badge">Completed</span>
+        <button onclick="openCourse('web_development')">Open</button>
+      </div>
+
+      <div class="card completed">
+        <h4>Python Fundamentals</h4>
+        <p>Duration: 4 Weeks</p>
+        <p>Provider: Udemy</p>
+        <span class="badge">Completed</span>
+        <button onclick="openCourse('python')">Open</button>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+<div id="trainingContent"></div>
+<script>
+function openCourse(course) {
+  localStorage.setItem("course", course);
+  window.location.href = "course.html";
+}
+
+let skill = localStorage.getItem("selectedSkill");
+let content = document.getElementById("trainingContent");
+
+
+function go(page) {
+  window.location.href = page;
+}
+
+function logout() {
+  localStorage.clear(); // remove user data
+  window.location.href = "index.html"; // login page
+}
+
+</script>
+
+</body>
+</html>

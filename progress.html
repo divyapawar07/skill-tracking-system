@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Skill Progress</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="progress.css">
+</head>
+<body>
+
+<div class="container">
+
+  <h2>📊 Skill Progress</h2>
+
+  <!-- Progress Bars -->
+  <div class="card">
+
+    <div class="skill">
+      <div class="info">
+        <span>HTML</span>
+        <span>70%</span>
+      </div>
+      <div class="bar"><div class="html"></div></div>
+    </div>
+
+    <div class="skill">
+      <div class="info">
+        <span>CSS</span>
+        <span>50%</span>
+      </div>
+      <div class="bar"><div class="css"></div></div>
+    </div>
+
+    <div class="skill">
+      <div class="info">
+        <span>Java</span>
+        <span>80%</span>
+      </div>
+      <div class="bar"><div class="java"></div></div>
+    </div>
+
+  </div>
+
+  <!-- Simple Chart -->
+  <div class="card">
+    <h3>📈 Skill Comparison</h3>
+
+    <div class="chart">
+      <div class="chart-bar html-bar">HTML</div>
+      <div class="chart-bar css-bar">CSS</div>
+      <div class="chart-bar java-bar">Java</div>
+    </div>
+  </div>
+
+</div>
+<script>
+function go(page) {
+  window.location.href = page;
+}
+
+function logout() {
+  localStorage.clear(); // remove user data
+  window.location.href = "index.html"; // login page
+}
+</script>
+</body>
+</html>

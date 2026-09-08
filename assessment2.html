@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Assessment Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assessment.css">
+</head>
+<body>
+
+<div class="container">
+
+  <h2>📝 Skill Assessment</h2>
+
+  <!-- Take Test Button -->
+  <div class="test-section">
+    <button class="take-test-btn">Take New Test</button>
+  </div>
+<button onclick="goHome()">Go Home</button>
+
+  <!-- Available Tests -->
+  <div class="section">
+    <h3>Available Tests</h3>
+
+    <div class="test-cards">
+      <div class="card">
+        <h4>HTML Test</h4>
+        <p>Duration: 30 mins</p>
+        <button onlick="startTest('html')">Start</button>
+      </div>
+
+      <div class="card">
+        <h4>CSS Test</h4>
+        <p>Duration: 25 mins</p>
+        <button onclick="startTest('css')">Start</button>
+      </div>
+
+      <div class="card">
+        <h4>Java Test</h4>
+        <p>Duration: 40 mins</p>
+        <button onclick="startTest('java')">Start</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Score History -->
+  <div class="section">
+    
+
+<h3>Score History</h3>
+
+<table border="1" cellpadding="10">
+  <tr>
+    <th>Test Name</th>
+    <th>Score</th>
+    <th>Max Score</th>
+    <th>Date</th>
+    <th>Status</th>
+  </tr>
+  <tbody id="historyTable"></tbody>
+</table>
+    
+
+  </div>
+
+</div>
+<script>
+function startTest(course) {
+
+  // save course (important for report/history)
+  localStorage.setItem("course", course);
+
+  // redirect based on course
+  if(course === "html") {
+    window.location.href = "htmltest.html";
+  }
+  else if(course === "css") {
+    window.location.href = "csstest.html";
+  }
+  else if(course === "java") {
+    window.location.href = "javatest.html";
+  }
+}
+let history = JSON.parse(localStorage.getItem("testHistory")) || [];
+
+let output = "";
+
+history.forEach(item => {
+
+  let color = item.status === "Pass" ? "green" : "red";
+
+  output += `
+    <tr>
+      <td>${item.course}</td>
+      <td>${item.score}</td>
+      <td>${item.max}</td>
+      <td>${item.date}</td>
+      <td style="color:${color}; font-weight:bold;">
+        ${item.status}
+      </td>
+    </tr>
+  `;
+});
+
+document.getElementById("historyTable").innerHTML = output;
+function go(page) {
+  window.location.href = page;
+}
+
+function logout() {
+  localStorage.clear(); // remove user data
+  window.location.href = "index.html"; // login page
+}
+function goHome(){
+window.location.href="dashboard.html";
+}
+</script>
+</body>
+</html>

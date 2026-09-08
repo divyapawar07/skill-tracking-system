@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Profile Card -->
+  <div class="profile-card">
+    <img src="https://via.placeholder.com/100" class="profile-img">
+    <h2 id="profileUsername"></h2>
+    <p>Email: <span id="profileEmail"></span></p>
+    <p>Role: <span id="profileRole"></span></p>
+    <button onclick="go('edit-profile.html')">Edit Profile</button>
+  </div>
+
+  <!-- Skill Section -->
+  <div class="section">
+    <h3>Skill Summary</h3>
+
+    <div class="progress-bar">
+      <span>HTML</span>
+      <div class="bar"><div style="width:80%"></div></div>
+    </div>
+
+    <div class="progress-bar">
+      <span>CSS</span>
+      <div class="bar"><div style="width:70%"></div></div>
+    </div>
+
+    <div class="progress-bar">
+      <span>Java</span>
+      <div class="bar"><div style="width:60%"></div></div>
+    </div>
+
+  </div>
+
+  <!-- Certifications -->
+  <div class="section">
+    <h3>Certifications</h3>
+
+    <ul class="cert-list">
+      <li>🏅 HTML & CSS Certification - Coursera</li>
+      <li>🏅 Java Programming - Udemy</li>
+      <li>🏅 Web Development Basics - Google</li>
+    </ul>
+
+  </div>
+
+</div>
+
+<script>
+
+// Check login
+let username = localStorage.getItem("username");
+let email = localStorage.getItem("email");
+let role = localStorage.getItem("role");
+
+if(!username){
+  window.location.href = "login.html";
+}
+
+// Display data
+document.getElementById("profileUsername").innerText = username;
+document.getElementById("profileEmail").innerText = email;
+document.getElementById("profileRole").innerText = role;
+
+function go(page){
+  window.location.href = page;
+}
+// Logout
+function logout() {
+  localStorage.clear();
+  window.location.href = "login.html";
+}
+
+</script>
+
+</body>
+</html>

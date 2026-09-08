@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>SkillTrack Premium Certificate</title>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:'Segoe UI',sans-serif;
+    background: radial-gradient(circle at top,#1e3c72,#0f2027);
+}
+
+.certificate{
+    width:950px;
+    height:600px;
+    background: linear-gradient(135deg,#ffffff,#f3f4f6);
+    border-radius:25px;
+    padding:50px;
+    position:relative;
+    box-shadow:0 20px 60px rgba(0,0,0,0.4);
+    overflow:hidden;
+}
+
+.certificate::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:25px;
+    padding:3px;
+    background:linear-gradient(45deg,#ffd700,#4F46E5,#ffd700);
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+
+.badge{
+    position:absolute;
+    top:25px;
+    right:30px;
+    background:linear-gradient(45deg,#ffd700,#facc15);
+    padding:10px 18px;
+    border-radius:30px;
+    font-weight:bold;
+    box-shadow:0 0 15px gold;
+}
+
+.logo{
+    text-align:center;
+    font-size:28px;
+    font-weight:bold;
+    letter-spacing:3px;
+}
+
+.logo span{color:#4F46E5;}
+
+h1{
+    text-align:center;
+    margin:15px 0;
+    font-size:32px;
+    color:#111;
+}
+
+.name{
+    text-align:center;
+    font-size:36px;
+    font-weight:bold;
+    margin:20px 0;
+    color:#4F46E5;
+}
+
+.center{text-align:center;}
+
+.course{
+    font-size:20px;
+    margin:10px 0;
+}
+
+.qr-box{
+    position:absolute;
+    right:40px;
+    bottom:120px;
+    background:white;
+    padding:6px;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+.footer{
+    position:absolute;
+    bottom:30px;
+    left:40px;
+    right:40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+#certificateID{
+    font-weight:bold;
+    color:#4F46E5;
+}
+
+.controls{
+    position:absolute;
+    bottom:20px;
+    right:20px;
+}
+
+button{
+    margin:5px;
+    padding:8px 15px;
+    border:none;
+    border-radius:8px;
+    background:#4F46E5;
+    color:white;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#4338CA;
+}
+
+@media print{
+    .controls{display:none;}
+}
+/* 🔥 PDF FIX (ADD THIS AT END) */
+.pdf-mode {
+    background: white !important;
+}
+
+.pdf-mode .certificate {
+    background: white !important;
+    box-shadow: none !important;
+}
+
+.pdf-mode .certificate::before {
+    display: none !important;
+}
+
+.pdf-mode .badge {
+    box-shadow: none !important;
+}
+
+.pdf-mode .qr-box {
+    box-shadow: none !important;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="certificate" id="certificateContent">
+
+<div class="badge">🏆 VERIFIED</div>
+
+<div class="logo">SKILL<span>TRACK</span></div>
+
+<h1>Certificate of Excellence</h1>
+
+<div class="center">This certificate is proudly awarded to</div>
+
+<div class="name" id="studentName"></div>
+
+<div class="center">for successfully completing</div>
+
+<div class="center course" id="courseName"></div>
+
+<div class="center" id="scoreText"></div>
+<div class="center" id="dateText"></div>
+
+<div class="qr-box">
+    <div id="qrcode"></div>
+</div>
+
+<div class="footer">
+    <div>
+        <img src="signature.png" width="130"><br>
+        Director<br>
+        SkillTrack Academy
+    </div>
+    <div id="certificateID"></div>
+</div>
+
+<div class="controls">
+    <button onclick="downloadPDF()">Download PDF</button>
+    <button onclick="shareLinkedIn()">LinkedIn</button>
+</div>
+
+</div>
+
+<script>
+
+let testHistory = JSON.parse(localStorage.getItem("testHistory")) || [];
+
+// 🔥 always latest
+let index = testHistory.length - 1;
+
+if(testHistory.length > 0){
+
+    let data = testHistory[index];
+
+    document.getElementById("studentName").innerText =
+        localStorage.getItem("username") || "Student";
+
+    document.getElementById("courseName").innerText = data.course;
+    document.getElementById("scoreText").innerText = "Score: " + data.score + "%";
+    document.getElementById("dateText").innerText = "Issued: " + data.date;
+
+}
+else{
+    alert("❌ No test found. Please give test first.");
+}
+function downloadPDF(){
+
+    let body = document.body;
+    let element = document.getElementById("certificateContent");
+
+    // 👉 Apply PDF mode
+    body.classList.add("pdf-mode");
+
+    let opt = {
+        margin: 0,
+        filename: 'SkillTrack_Certificate.pdf',
+        image: { type: 'jpeg', quality: 1 },
+        html2canvas: { scale: 3, useCORS: true },
+        jsPDF: { unit: 'px', format: [950,600], orientation: 'landscape' }
+    };
+
+    setTimeout(() => {
+        html2pdf().set(opt).from(element).save().then(() => {
+            
+            // 👉 Remove PDF mode after download
+            body.classList.remove("pdf-mode");
+
+        });
+    }, 500);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Course</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+<style>
+body {
+  font-family: Poppins;
+  background: #F9FAFB;
+  padding: 20px;
+  transition: 0.3s;
+}
+
+h2 {
+  color: #4F46E5;
+}
+
+.dark {
+  background: #111;
+  color: white;
+}
+
+.dark .chapter {
+  background: #1f1f1f;
+  color: white;
+}
+
+.top-buttons{
+  margin-bottom:20px;
+}
+
+button {
+  background: #FACC15;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-right:10px;
+}
+
+button:hover {
+  transform: scale(1.05);
+  background: #eab308;
+}
+
+.chapter {
+  background: white;
+  padding: 15px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: 0.3s;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.chapter:hover {
+  transform: translateY(-3px);
+}
+
+.locked {
+  opacity:0.5;
+}
+
+#progressBar {
+  background: #ddd;
+  height: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+#progressFill {
+  height: 100%;
+  width: 0%;
+  background: #22C55E;
+  border-radius: 10px;
+  transition: width 0.5s;
+}
+</style>
+
+</head>
+
+<body>
+
+<h2 id="title"></h2>
+
+<div class="top-buttons">
+  <button onclick="toggleDark()">🌙 Dark Mode</button>
+  <button onclick="continueLearning()">Continue Learning</button>
+</div>
+
+<div id="progressBar">
+  <div id="progressFill"></div>
+</div>
+
+<div id="chapters"></div>
+
+<br>
+<button onclick="goToTest()">Take Test</button>
+
+<script>
+
+let course = localStorage.getItem("course") || "html";
+let user = localStorage.getItem("currentUser") || "defaultUser";
+
+document.getElementById("title").innerText =
+  course.toUpperCase() + " Course";
+
+function generateChapters(topic) {
+  let chapters = {};
+  for(let i=1; i<=30; i++) {
+    chapters[i] = {
+      title: topic + " Chapter " + i
+    };
+  }
+  return chapters;
+}
+
+let allCourses = {
+  html: generateChapters("HTML"),
+  python: generateChapters("Python"),
+  java: generateChapters("Java"),
+  css: generateChapters("CSS")
+};
+
+let courseData = allCourses[course];
+
+// 🔥 USER-WISE PROGRESS FIX
+let progress = JSON.parse(localStorage.getItem(user + "_progress")) || {};
+if(!progress[course]) progress[course] = [];
+
+
+// 📚 SHOW CHAPTERS (UNCHANGED)
+for(let i=1; i<=30; i++) {
+
+  let chapter = courseData[i];
+  let isLocked = (i > progress[course].length + 1);
+
+  document.getElementById("chapters").innerHTML += `
+    <div class="chapter ${isLocked ? 'locked' : ''}">
+      <b>Chapter ${i}: ${chapter.title}</b>
+      ${
+        isLocked 
+        ? "<span>🔒 Locked</span>"
+        : `<button onclick="openLesson(${i})">Open</button>`
+      }
+    </div>
+  `;
+}
+
+
+// 🚀 OPEN LESSON (UNCHANGED)
+function openLesson(id){
+  localStorage.setItem("currentChapter", id);
+  window.location.href = "lesson.html";
+}
+
+
+// 📊 PROGRESS BAR (UNCHANGED)
+function updateProgress(){
+  let completed = progress[course].length;
+  let percent = (completed / 30) * 100;
+  document.getElementById("progressFill").style.width = percent + "%";
+}
+updateProgress();
+
+
+// 🔄 CONTINUE LEARNING (UNCHANGED)
+function continueLearning(){
+  let next = progress[course].length + 1;
+
+  if(next <= 30){
+    openLesson(next);
+  } else {
+    alert("Course Completed 🎉");
+  }
+}
+
+
+// 🌙 DARK MODE (UNCHANGED)
+function toggleDark(){
+  document.body.classList.toggle("dark");
+}
+
+
+// 🧪 TEST REDIRECT (UNCHANGED)
+function goToTest(){
+
+  if(progress[course].length < 30){
+    alert("Complete all chapters before taking test!");
+    return;
+  }
+
+  if(course === "html"){
+    window.location.href = "htmltest.html";
+  }
+  else if(course === "python"){
+    window.location.href = "pythontest.html";
+  }
+  else if(course === "java"){
+    window.location.href = "javatest.html";
+  }
+  else if(course === "css"){
+    window.location.href = "csstest.html";
+  }
+}
+
+</script>
+
+</body>
+</html>

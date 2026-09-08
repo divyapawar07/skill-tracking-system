@@ -1,0 +1,159 @@
+<h2>Communication Skills Quiz</h2>
+    <form id="quizForm">
+        
+        
+            <p class="question-text">1. The word "communication" is derived from the Latin word 'communicare', which means:</p>
+            <label><input type="radio" name="q1" value="To speak"> To speak</label><br>
+            <label><input type="radio" name="q1" value="To share"> To share</label><br>
+            <label><input type="radio" name="q1" value="To listen"> To listen</label><br>
+            <label><input type="radio" name="q1" value="To write"> To write</label><br><br>
+        
+
+        
+            <p class="question-text">2. Which is considered the most important tool of communication?</p>
+            <label><input type="radio" name="q2" value="Gestures"> Gestures</label><br>
+            <label><input type="radio" name="q2" value="Body language"> Body language</label><br>
+            <label><input type="radio" name="q2" value="Language"> Language</label><br>
+            <label><input type="radio" name="q2" value=" Posture"> Posture</label><br><br>
+        
+
+        
+            <p class="question-text">3. Interpreting the sender's message is called:</p>
+            <label><input type="radio" name="q3" value="Encoding"> Encoding</label><br>
+            <label><input type="radio" name="q3" value="Channeling"> Channeling</label><br>
+            <label><input type="radio" name="q3" value="Decoding"> Decoding</label><br>
+            <label><input type="radio" name="q3" value="Feedback"> Feedback</label><br><br>
+        
+
+        
+            <p class="question-text">4. Best communication for complex technical info that needs to be referred to later:</p>
+            <label><input type="radio" name="q4" value="Oral"> Oral</label><br>
+            <label><input type="radio" name="q4" value="Non-verbal"> Non-verbal</label><br>
+            <label><input type="radio" name="q4" value="Visual"> Visual</label><br>
+            <label><input type="radio" name="q4" value="Written"> Written</label><br><br>
+        
+            <p class="question-text">5. What is the primary goal of "active listening"?</p>
+            <label><input type="radio" name="q5" value="To prepare a response"> To prepare a response</label><br>
+            <label><input type="radio" name="q5" value="To ensure you correctly understand"> To ensure you correctly understand</label><br>
+            <label><input type="radio" name="q5" value="To change the subject"> To change the subject</label><br>
+            <label><input type="radio" name="q5" value="To listen only for keywords"> To listen only for keywords</label><br><br>
+       
+            <p class="question-text">6. Which cue conveys confidence and professionalism?</p>
+            <label><input type="radio" name="q6" value="Slumped shoulders"> Slumped shoulders</label><br>
+            <label><input type="radio" name="q6" value="Upright, straight posture"> Upright, straight posture</label><br>
+            <label><input type="radio" name="q6" value="Avoiding eye contact"> Avoiding eye contact</label><br>
+            <label><input type="radio" name="q6" value="Crossing arms tightly"> Crossing arms tightly</label><br><br>
+       
+            <p class="question-text">7. Example of a "semantic" barrier to communication:</p>
+            <label><input type="radio" name="q7" value="Background noise"> Background noise</label><br>
+            <label><input type="radio" name="q7" value="Using technical jargon"> Using technical jargon</label><br>
+            <label><input type="radio" name="q7" value="Poor internet connection"> Poor internet connection</label><br>
+            <label><input type="radio" name="q7" value="Personal prejudices"> Personal prejudices</label><br><br>
+        
+            <p class="question-text">8. What does "KISS" stand for in communication?</p>
+            <label><input type="radio" name="q8" value="Keep It Short and Specific"> Keep It Short and Specific</label><br>
+            <label><input type="radio" name="q8" value="Keep It Simple and Straightforward"> Keep It Simple and Straightforward</label><br>
+            <label><input type="radio" name="q8" value="Know Important Subject Steps"> Know Important Subject Steps</label><br>
+            <label><input type="radio" name="q8" value="Keep It Structured and Systematic"> Keep It Structured and Systematic</label><br><br>
+        
+            <p class="question-text">9. "Haptics" is the study of:</p>
+            <label><input type="radio" name="q9" value="Body movements"> Body movements</label><br>
+            <label><input type="radio" name="q9" value="Eye contact"> Eye contact</label><br>
+            <label><input type="radio" name="q9" value="Touch"> Touch</label><br>
+            <label><input type="radio" name="q9" value="Facial expressions"> Facial expressions</label><br>
+        
+            <p class="question-text">10. Component that serves as acknowledgment and response:</p>
+            <label><input type="radio" name="q10" value="Channel"> Channel</label><br>
+            <label><input type="radio" name="q10" value="Protocol"> Protocol</label><br>
+            <label><input type="radio" name="q10" value="Feedback"> Feedback</label><br>
+            <label><input type="radio" name="q10" value="Encoding"> Encoding</label><br>
+        
+
+        <button type="button" onclick="submitTest()">Submit</button>
+
+</form>
+
+<script>
+
+function submitTest() {
+let questions = {
+  q1: "1. The word 'communication' is derived from the Latin word 'communicare', which means:",
+  q2: "2. Which is considered the most important tool of communication?",
+  q3: "3. Interpreting the sender's message is called:",
+  q4: "4. Best communication for complex technical info that needs to be referred to later:",
+  q5: "5. What is the primary goal of 'active listening'?",
+  q6: "6. Which cue conveys confidence and professionalism?",
+  q7: "7. Example of a 'semantic' barrier to communication:",
+  q8: "8. What does 'KISS' stand for in communication?",
+  q9: "9. 'Haptics' is the study of:",
+  q10: "10. Component that serves as acknowledgment and response:"
+};
+
+localStorage.setItem("questions", JSON.stringify(questions));
+
+
+  let correctAnswers = {
+    q1: "To share",
+    q2: "Language",
+    q3: "Decoding",
+    q4: "Written",
+    q5: "To ensure you correctly understand",
+    q6: "Upright, straight posture",
+    q7: "Using technical jargon",
+    q8: "Keep It Simple and Straightforward",
+    q9: "Touch",
+    q10: "Feedback"
+  };
+
+  let score = 0;
+  let userAnswers = {};
+
+  for(let key in correctAnswers) {
+    let selected = document.querySelector(`input[name="${key}"]:checked`);
+
+    if(selected){
+      userAnswers[key] = selected.value;
+      if(selected.value === correctAnswers[key]){
+        score++;
+      }
+    }
+  }
+
+  let percent = (score / 10) * 100;
+
+  // ✅ YOUR FEATURES (unchanged)
+  localStorage.setItem("score", percent);
+  localStorage.setItem("userAnswers", JSON.stringify(userAnswers));
+  localStorage.setItem("correctAnswers", JSON.stringify(correctAnswers));
+
+  // 🔥 USER BASED HISTORY (KEEPING YOUR FEATURE)
+  let user = localStorage.getItem("currentUser") || "defaultUser";
+  let course = localStorage.getItem("course") || "Course";
+  let today = new Date().toLocaleDateString();
+  let status = percent >= 50 ? "Pass" : "Fail";
+
+  let history = JSON.parse(localStorage.getItem(user + "_testHistory")) || [];
+
+  history.push({
+    course: course,
+    score: percent,
+    max: 100,
+    date: today,
+    status: status
+  });
+
+  localStorage.setItem(user + "_testHistory", JSON.stringify(history));
+
+  // 🔥 ALSO SAVE COMMON (for safety)
+  localStorage.setItem("testHistory", JSON.stringify(history));
+
+  // 🔥 IMPORTANT (certificate ko batane ke liye konsa test)
+  localStorage.setItem("selectedCertificateIndex", history.length - 1);
+
+  // ✅ FINAL REDIRECT
+  window.location.href = "result.html";
+}
+</script>
+</body>
+</html>
+

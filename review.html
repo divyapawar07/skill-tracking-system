@@ -1,0 +1,48 @@
+<h2>Review Answers</h2>
+
+<div id="reviewBox"></div>
+
+<button onclick="goBack()">Go Back</button>
+
+<script>
+
+let userAnswers = JSON.parse(localStorage.getItem("userAnswers"));
+let correctAnswers = JSON.parse(localStorage.getItem("correctAnswers"));
+let questions = JSON.parse(localStorage.getItem("questions"));
+
+function escapeHTML(text) {
+  return text
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+let output = "";
+
+for(let key in correctAnswers) {
+
+  let user = userAnswers[key] || "Not Attempted";
+  let correct = correctAnswers[key];
+  let question = questions[key];
+
+  if(user === correct) {
+    output += `<div style="margin-bottom:15px;">
+      <p><b>${question}</b></p>
+      <p style="color:green;">Correct ✅ (${escapeHTML(correct)})</p>
+    </div>`;
+  } else {
+    output += `<div style="margin-bottom:15px;">
+      <p><b>${question}</b></p>
+      <p style="color:red;">Wrong ❌</p>
+      <p>Your Answer: ${escapeHTML(user)}</p>
+      <p>Correct Answer: ${escapeHTML(correct)}</p>
+    </div>`;
+  }
+}
+
+document.getElementById("reviewBox").innerHTML = output;
+
+function goBack() {
+  window.location.href = "result.html";
+}
+
+</script>

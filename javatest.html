@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Java Test</title>
+</head>
+
+<body>
+
+<h2>Java Test</h2>
+
+<form id="quizForm">
+
+<p>1. Which component is used to compile, debug, and execute Java programs?</p>
+<input type="radio" name="q1" value="JRE"> JRE<br>
+<input type="radio" name="q1" value="JIT"> JIT<br>
+<input type="radio" name="q1" value="JDK"> JDK<br>
+<input type="radio" name="q1" value="JVM"> JVM<br><br>
+
+<p>2. Which of these is NOT a feature of Java?</p>
+<input type="radio" name="q2" value="Object-oriented"> Object-oriented<br>
+<input type="radio" name="q2" value="Use of pointers"> Use of pointers<br>
+<input type="radio" name="q2" value="Portable"> Portable<br>
+<input type="radio" name="q2" value="Dynamic and Extensible"> Dynamic and Extensible<br><br>
+
+<p>3. What is the default value of a boolean variable in Java?</p>
+<input type="radio" name="q3" value="true"> true<br>
+<input type="radio" name="q3" value="0"> 0<br>
+<input type="radio" name="q3" value="false"> false<br>
+<input type="radio" name="q3" value="NULL"> NULL<br><br>
+
+<p>4. Which of these is NOT a primitive data type?</p>
+<input type="radio" name="q4" value="int"> int<br>
+<input type="radio" name="q4" value="float"> float<br>
+<input type="radio" name="q4" value="cha"> char<br>
+<input type="radio" name="q4" value="string"> string<br><br>
+
+<p>5. Which keyword is used to create a subclass in Java?</p>
+<input type="radio" name="q5" value="implements"> implements<br>
+<input type="radio" name="q5" value="extends"> extends<br>
+<input type="radio" name="q5" value="inherits"> inherits<br>
+<input type="radio" name="q5" value="imports"> imports<br><br>
+
+<p>6. What is the size of a double variable in Java?</p>
+<input type="radio" name="q6" value="2 bytes"> 2 bytes<br>
+<input type="radio" name="q6" value="4 bytes"> 4 bytes<br>
+<input type="radio" name="q6" value="8 bytes"> 8 bytes<br>
+<input type="radio" name="q6" value="16 bytes"> 16 bytes<br><br>
+
+<p>7. Which of the following is used to handle exceptions?</p>
+<input type="radio" name="q7" value="try-catch"> try-catch<br>
+<input type="radio" name="q7" value="throw-throws"> throw-throws<br>
+<input type="radio" name="q7" value="finally"> finally<br>
+<input type="radio" name="q7" value="All of the above"> All of the above<br><br>
+
+<p>8. Which access modifier makes a member visible only within its own class?</p>
+<input type="radio" name="q8" value="public"> public<br>
+<input type="radio" name="q8" value="protected"> protected<br>
+<input type="radio" name="q8" value="private"> private<br>
+<input type="radio" name="q8" value="default"> default<br><br>
+
+<p>9. What does the final keyword signify when applied to a variable?</p>
+<input type="radio" name="q9" value="The variable cannot be inherited"> The variable cannot be inherited<br>
+<input type="radio" name="q9" value="The variable's value cannot be changed"> The variable's value cannot be changed<br>
+<input type="radio" name="q9" value="The variable is visible to all classes"> The variable is visible to all classes<br>
+<input type="radio" name="q9" value="The variable is stored in the heap"> The variable is stored in the heap<br><br>
+
+<p>10. Which collection allows unique elements only?</p>
+<input type="radio" name="q10" value="list"> list<br>
+<input type="radio" name="q10" value="set"> set<br>
+<input type="radio" name="q10" value="vector"> vector<br>
+<input type="radio" name="q10" value="stack"> stack<br><br>
+
+<button type="button" onclick="submitTest()">Submit</button>
+
+</form>
+
+<script>
+
+function submitTest() {
+
+  // QUESTIONS (unchanged feature)
+  let questions = {
+    q1: "Which component is used to compile, debug, and execute Java programs?",
+    q2: "Which of these is NOT a feature of Java?",
+    q3: "What is the default value of a boolean variable in Java?",
+    q4: "Which of these is NOT a primitive data type?",
+    q5: "Which keyword is used to create a subclass in Java?",
+    q6: "What is the size of a double variable in Java?",
+    q7: "Which of the following is used to handle exceptions?",
+    q8: "Which access modifier makes a member visible only within its own class?",
+    q9: "What does the final keyword signify when applied to a variable?",
+    q10: "Which collection allows unique elements only?"
+  };
+
+  localStorage.setItem("questions", JSON.stringify(questions));
+
+  // CORRECT ANSWERS
+  let correctAnswers = {
+    q1: "JDK",
+    q2: "Use of pointers",
+    q3: "false",
+    q4: "string",
+    q5: "extends",
+    q6: "8 bytes",
+    q7: "All of the above",
+    q8: "private",
+    q9: "The variable's value cannot be changed",
+    q10: "set"
+  };
+
+  let score = 0;
+  let userAnswers = {};
+
+  for(let key in correctAnswers) {
+    let selected = document.querySelector(`input[name="${key}"]:checked`);
+
+    if(selected){
+      userAnswers[key] = selected.value;
+      if(selected.value === correctAnswers[key]){
+        score++;
+      }
+    }
+  }
+
+  let percent = (score / 10) * 100;
+
+  // ✅ YOUR FEATURES (unchanged)
+  localStorage.setItem("score", percent);
+  localStorage.setItem("userAnswers", JSON.stringify(userAnswers));
+  localStorage.setItem("correctAnswers", JSON.stringify(correctAnswers));
+
+  // 🔥 USER BASED HISTORY (KEEPING YOUR FEATURE)
+  let user = localStorage.getItem("currentUser") || "defaultUser";
+  let course = localStorage.getItem("course") || "Course";
+  let today = new Date().toLocaleDateString();
+  let status = percent >= 50 ? "Pass" : "Fail";
+
+  let history = JSON.parse(localStorage.getItem(user + "_testHistory")) || [];
+
+  history.push({
+    course: course,
+    score: percent,
+    max: 100,
+    date: today,
+    status: status
+  });
+
+  localStorage.setItem(user + "_testHistory", JSON.stringify(history));
+
+  // 🔥 ALSO SAVE COMMON (for safety)
+  localStorage.setItem("testHistory", JSON.stringify(history));
+
+  // 🔥 IMPORTANT (certificate ko batane ke liye konsa test)
+  localStorage.setItem("selectedCertificateIndex", history.length - 1);
+
+  // ✅ FINAL REDIRECT
+  window.location.href = "result.html";
+}
+</script>
+</body>
+</html>

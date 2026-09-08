@@ -1,0 +1,133 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: #FFF7ED;
+  padding: 20px;
+}
+
+/* Container */
+.container {
+  max-width: 1000px;
+  margin: auto;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #F59E0B;
+}
+
+/* Take Test Button */
+.test-section {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.take-test-btn {
+  padding: 12px 20px;
+  background: #22C55E;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.take-test-btn:hover {
+  background: #16A34A;
+}
+
+/* Section */
+.section {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.section h3 {
+  margin-bottom: 15px;
+}
+
+/* Test Cards */
+.test-cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: #FFF7ED;
+  padding: 15px;
+  width: 200px;
+  border-radius: 10px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h4 {
+  margin-bottom: 10px;
+  color: #F59E0B;
+}
+
+.card p {
+  margin-bottom: 10px;
+}
+
+.card button {
+  padding: 6px 10px;
+  background: #F59E0B;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.card button:hover {
+  background: #EA580C;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th,
+table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+table th {
+  background: #F59E0B;
+  color: white;
+}
+
+/* Status */
+.status {
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.pass {
+  background: #22C55E;
+  color: white;
+}
+
+.fail {
+  background: #EF4444;
+  color: white;
+}

@@ -1,0 +1,130 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: #FFF7ED;
+  padding: 20px;
+}
+
+/* Container */
+.container {
+  max-width: 1000px;
+  margin: auto;
+}
+
+/* Section */
+.section {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.section h2 {
+  margin-bottom: 15px;
+  color: #F59E0B;
+}
+
+/* Form */
+.skill-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skill-form input,
+.skill-form select {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.skill-form input[type="range"] {
+  cursor: pointer;
+}
+
+.skill-form button {
+  padding: 10px;
+  background: #22C55E;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.skill-form button:hover {
+  background: #16A34A;
+}
+
+select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th,
+table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+table th {
+  background: #F59E0B;
+  color: white;
+}
+
+/* Status */
+.status {
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.completed {
+  background: #22C55E;
+  color: white;
+}
+
+.pending {
+  background: #EF4444;
+  color: white;
+}
+
+/* Buttons */
+.edit {
+  padding: 5px 10px;
+  background: #3B82F6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.delete {
+  padding: 5px 10px;
+  background: #EF4444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.edit:hover {
+  background: #2563EB;
+}
+
+.delete:hover {
+  background: #DC2626;
+}

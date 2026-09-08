@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reports Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="reports.css">
+</head>
+<body>
+
+<div class="container">
+
+  <h2>📊 Reports & Analysis</h2>
+
+  <!-- Skill Gap Analysis -->
+  <div class="section">
+    <h3>Skill Gap Analysis</h3>
+
+    <div class="bar-chart">
+      <div class="bar">
+        <span>HTML</span>
+        <div class="progress"><div style="width:80%"></div></div>
+      </div>
+
+      <div class="bar">
+        <span>CSS</span>
+        <div class="progress"><div style="width:50%"></div></div>
+      </div>
+
+      <div class="bar">
+        <span>Java</span>
+        <div class="progress"><div style="width:60%"></div></div>
+      </div>
+
+      <div class="bar">
+        <span>Python</span>
+        <div class="progress"><div style="width:30%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Report Summary -->
+  <div class="section">
+    <h3>Summary</h3>
+    <h3 id="reportText"></h3>
+  </div>
+
+  <!-- Test Report Table -->
+  <div class="section">
+    <h3>Test Report</h3>
+
+    <table border="1" cellpadding="10">
+      <tr>
+        <th>Course</th>
+        <th>Score (%)</th>
+      </tr>
+      <tbody id="reportTable"></tbody>
+    </table>
+  </div>
+
+</div>
+
+<script>
+
+
+// ✅ Test History Table
+let history = JSON.parse(localStorage.getItem("testHistory")) || [];
+
+let output = "";
+
+history.forEach(item => {
+  output += `
+    <tr>
+      <td>${item.course}</td>
+      <td>${item.score}%</td>
+    </tr>
+  `;
+});
+
+document.getElementById("reportTable").innerHTML = output;
+
+</script>
+
+</body>
+</html>

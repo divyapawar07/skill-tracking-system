@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reports Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="reports.css">
+</head>
+<body>
+
+<div class="container">
+
+  <h2>📊 Reports & Analysis</h2>
+
+  <!-- Skill Gap Analysis -->
+  <div class="section">
+    <h3>Skill Gap Analysis</h3>
+
+    <div class="bar-chart">
+      <div class="bar">
+        <span>HTML</span>
+        <div class="progress"><div style="width:80%"></div></div>
+      </div>
+
+      <div class="bar">
+        <span>CSS</span>
+        <div class="progress"><div style="width:50%"></div></div>
+      </div>
+
+      <div class="bar">
+        <span>Java</span>
+        <div class="progress"><div style="width:60%"></div></div>
+      </div>
+
+      <div class="bar">
+        <span>Python</span>
+        <div class="progress"><div style="width:30%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pie Chart -->
+  <div class="section">
+    <h3>Skill Distribution</h3>
+
+    <div class="pie-chart">
+      <div class="slice html"></div>
+      <div class="slice css"></div>
+      <div class="slice java"></div>
+    </div>
+
+    <div class="legend">
+      <p><span class="box html"></span> HTML</p>
+      <p><span class="box css"></span> CSS</p>
+      <p><span class="box java"></span> Java</p>
+    </div>
+  </div>
+
+  <!-- Export Buttons -->
+  <div class="section export">
+    <h3>Export Reports</h3>
+    <button class="pdf">Download PDF</button>
+    <button class="excel">Download Excel</button>
+  </div>
+
+</div>
+<h2>Report</h2>
+
+<h3 id="result"></h3>
+
+<script>
+let score = localStorage.getItem("postScore");
+
+let result = score >= 50 ? "Passed ✅" : "Failed ❌";
+
+document.getElementById("result").innerText =
+  "Final Score: " + score + "% | " + result;
+</script>
+</body>
+</html>

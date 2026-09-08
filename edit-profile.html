@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #4e73df, #1cc88a);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .edit-box {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      width: 350px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      background: #4e73df;
+      color: white;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+
+    button:hover {
+      background: #2e59d9;
+    }
+
+    .cancel {
+      background: gray;
+    }
+
+    .cancel:hover {
+      background: darkgray;
+    }
+  </style>
+</head>
+<body>
+
+<div class="edit-box">
+  <h2>Edit Profile</h2>
+
+  <input type="text" id="editUsername" placeholder="Enter Username">
+  <input type="email" id="editEmail" placeholder="Enter Email">
+
+  <select id="editRole">
+    <option>Admin</option>
+    <option>Manager</option>
+    <option>Student</option>
+  </select>
+
+  <button onclick="saveProfile()">Save Changes</button>
+  <button class="cancel" onclick="goBack()">Cancel</button>
+</div>
+
+<script>
+
+// Check login
+let username = localStorage.getItem("username");
+let email = localStorage.getItem("email");
+let role = localStorage.getItem("role");
+
+if(!username){
+  window.location.href = "login.html";
+}
+
+// Prefill existing data
+document.getElementById("editUsername").value = username;
+document.getElementById("editEmail").value = email;
+document.getElementById("editRole").value = role;
+
+// Save changes
+function saveProfile() {
+
+  let newUsername = document.getElementById("editUsername").value;
+  let newEmail = document.getElementById("editEmail").value;
+  let newRole = document.getElementById("editRole").value;
+
+  let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+  if(newUsername === "" || newEmail === ""){
+    alert("Please fill all fields!");
+  }
+  else if(!newEmail.match(emailPattern)){
+    alert("Enter valid email!");
+  }
+  else {
+    localStorage.setItem("username", newUsername);
+    localStorage.setItem("email", newEmail);
+    localStorage.setItem("role", newRole);
+
+    alert("Profile Updated Successfully!");
+    window.location.href = "profile.html";
+  }
+}
+
+// Cancel
+function goBack(){
+  window.location.href = "profile.html";
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Login - Skill Tracking</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="login.css">
+
+<style>
+.error{
+  color:red;
+  font-size:12px;
+  display:block;
+  margin-bottom:10px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Left Side -->
+
+  <div class="left">
+    <h1>SkillTrack 🎓</h1>
+    <p>Track your skills, grow your future.</p>
+  </div>
+
+  <!-- Right Side -->
+
+  <div class="right">
+    <div class="form-box">
+      <h2>Login</h2>
+
+```
+  <input type="text" id="username" placeholder="Enter Username">
+  <small class="error" id="usernameError"></small>
+
+  <input type="text" id="email" placeholder="Enter Email">
+  <small class="error" id="emailError"></small>
+
+  <!-- PASSWORD -->
+  <div style="position:relative;">
+    <input type="password" id="password" placeholder="Enter Password" style="width:100%;">
+    <span id="togglePassword" style="position:absolute; right:10px; top:10px; cursor:pointer;">👁</span>
+  </div>
+  <small class="error" id="passwordError"></small>
+  <small id="strengthMsg" style="font-size:12px;"></small>
+
+  <!-- ROLE -->
+  <select id="role"></select>
+  <small class="error" id="roleError"></small>
+
+  <button type="button" id="loginBtn">Login</button>
+
+  <p class="register">
+    Don't have an account? <a href="#">Register</a>
+  </p>
+</div>
+```
+
+  </div>
+
+</div>
+
+<script>
+
+let usernameInput = document.getElementById("username");
+let emailInput = document.getElementById("email");
+let passwordInput = document.getElementById("password");
+let roleInput = document.getElementById("role");
+let togglePassword = document.getElementById("togglePassword");
+let strengthMsg = document.getElementById("strengthMsg");
+
+// 👁 PASSWORD SHOW/HIDE
+togglePassword.addEventListener("click", function(){
+  passwordInput.type = passwordInput.type === "password" ? "text" : "password";
+});
+
+// 💪 PASSWORD STRENGTH
+passwordInput.addEventListener("input", function(){
+
+  let password = passwordInput.value;
+
+  if(password.length === 0){
+    strengthMsg.innerText = "";
+  }
+  else if(password.length < 4){
+    strengthMsg.innerText = "Weak Password";
+    strengthMsg.style.color = "red";
+  }
+  else if(password.length < 8){
+    strengthMsg.innerText = "Medium Password";
+    strengthMsg.style.color = "orange";
+  }
+  else{
+    strengthMsg.innerText = "Strong Password";
+    strengthMsg.style.color = "green";
+  }
+
+});
+
+// 🔥 ENTER KEY NAVIGATION (RESTORED)
+usernameInput.addEventListener("keydown", function(e){
+  if(e.key === "Enter"){
+    e.preventDefault();
+    emailInput.focus();
+  }
+});
+
+emailInput.addEventListener("keydown", function(e){
+  if(e.key === "Enter"){
+    e.preventDefault();
+    passwordInput.focus();
+  }
+});
+
+passwordInput.addEventListener("keydown", function(e){
+  if(e.key === "Enter"){
+    e.preventDefault();
+    roleInput.focus();
+  }
+});
+
+roleInput.addEventListener("keydown", function(e){
+  if(e.key === "Enter"){
+    e.preventDefault();
+    document.getElementById("loginBtn").click();
+  }
+});
+
+// 🔥 ROLE CONTROL (ONLY ADDITION)
+function updateRoleOptions(){
+
+  let name = usernameInput.value.toLowerCase().trim();
+  let email = emailInput.value.toLowerCase().trim();
+
+  if(name === "komal jadhav" && email === "komal19@gmail.com"){
+    roleInput.innerHTML = `<option>Admin</option>`;
+  }
+  else if(name === "divya pawar" && email === "divya01@gmail.com"){
+    roleInput.innerHTML = `<option>Manager</option>`;
+  }
+  else{
+    roleInput.innerHTML = `<option>Student</option>`;
+  }
+}
+
+usernameInput.addEventListener("input", updateRoleOptions);
+emailInput.addEventListener("input", updateRoleOptions);
+
+updateRoleOptions();
+
+// 🚀 LOGIN
+document.getElementById("loginBtn").addEventListener("click", function(){
+
+  let username = usernameInput.value.trim();
+  let email = emailInput.value.trim();
+  let password = passwordInput.value.trim();
+  let role = roleInput.value;
+
+  document.getElementById("usernameError").innerText = "";
+  document.getElementById("emailError").innerText = "";
+  document.getElementById("passwordError").innerText = "";
+  document.getElementById("roleError").innerText = "";
+
+  let valid = true;
+
+  if(username === ""){
+    document.getElementById("usernameError").innerText = "Enter username";
+    valid = false;
+  }
+
+  // ✅ EMAIL VALIDATION (RESTORED)
+  if(email === ""){
+    document.getElementById("emailError").innerText = "Enter email";
+    valid = false;
+  }
+  else if(!email.includes("@") || !email.includes(".") || !email.endsWith(".com")){
+    document.getElementById("emailError").innerText = "Enter valid email (.com required)";
+    valid = false;
+  }
+
+  if(password === ""){
+    document.getElementById("passwordError").innerText = "Enter password";
+    valid = false;
+  }
+
+  if(role === ""){
+    document.getElementById("roleError").innerText = "Select role";
+    valid = false;
+  }
+
+  if(valid){
+
+    localStorage.setItem("currentUser", email);
+    localStorage.setItem("username", username);
+    localStorage.setItem("email", email);
+    localStorage.setItem("role", role);
+
+    if(role === "Student"){
+      window.location.href = "dashboard.html";
+    }
+    else if(role === "Manager"){
+      window.location.href = "manager1.html";
+    }
+    else if(role === "Admin"){
+      window.location.href = "admin.html";
+    }
+
+  }
+
+});
+
+</script>
+
+</body>
+</html>

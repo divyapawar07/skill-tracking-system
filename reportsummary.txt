@@ -1,0 +1,16 @@
+// ✅ Summary
+let skill = localStorage.getItem("selectedSkill");
+let pre = localStorage.getItem("preScore") || 0;
+let post = localStorage.getItem("postScore") || 0;
+
+let improvement = post - pre;
+
+let result = post >= 50 ? "✅ Passed" : "❌ Failed";
+
+document.getElementById("reportText").innerText =
+  "Skill: " + skill +
+  " | Pre-Test: " + pre + "%" +
+  " | Post-Test: " + post + "%" +
+  " | Improvement: " + improvement + "%" +
+  " | Result: " + result;
+

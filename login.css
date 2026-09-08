@@ -1,0 +1,105 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: #FFF7ED;
+}
+
+/* Container */
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* Left Section */
+.left {
+  flex: 1;
+  background: linear-gradient(135deg, #F59E0B, #FB923C);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.left h1 {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.left p {
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+/* Right Section */
+.right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Form Box */
+.form-box {
+  background: white;
+  padding: 40px;
+  width: 320px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.form-box h2 {
+  margin-bottom: 20px;
+  color: #F59E0B;
+}
+
+/* Inputs */
+.form-box input,
+.form-box select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.form-box input:focus,
+.form-box select:focus {
+  border-color: #F59E0B;
+}
+
+/* Button */
+.form-box button {
+  width: 100%;
+  padding: 10px;
+  background: #F59E0B;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.form-box button:hover {
+  background: #EA580C;
+}
+
+/* Register Link */
+.register {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.register a {
+  color: #22C55E;
+  text-decoration: none;
+  font-weight: bold;
+}
